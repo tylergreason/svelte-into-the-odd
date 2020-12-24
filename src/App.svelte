@@ -35,7 +35,7 @@
 
 <div class="container">
     <h1>WELCOME</h1>
-    <input type="text">
+    <input type="text" placeholder="Name">
     <div class="player-container">
         <Stats></Stats>
         <PlayerItems></PlayerItems>
