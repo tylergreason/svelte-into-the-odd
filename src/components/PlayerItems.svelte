@@ -27,7 +27,7 @@
             <li 
                on:click={() => itemClick(item)}
                 data-item={JSON.stringify(item)}>
-                {item.name}: ${item.cost}, {!!item.damage ? item.damage : ''}
+                {item.name}{!!item.damage ? ', ' + item.damage : ''} (${item.cost})
             </li>
         {/each}
     </ul>

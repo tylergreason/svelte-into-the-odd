@@ -30,11 +30,14 @@
     .player-container {
         display: flex;
         justify-content: space-between;
+        & :global(> div) {
+            min-width: 200px;
+        }
     }
 </style>
 
 <div class="container">
-    <h1>WELCOME</h1>
+    <h1>Into the Odd Character Generator</h1>
     <input type="text" placeholder="Name">
     <div class="player-container">
         <Stats></Stats>

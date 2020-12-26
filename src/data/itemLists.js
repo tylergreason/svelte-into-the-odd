@@ -5,8 +5,9 @@ function uppercaseFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export function createItemList(array, damage, cost, category) {
-  const items = array.map((ele) => {
+export function createItemList(list, damage, cost, category) {
+  list = cleanList(list);
+  const items = list.map((ele) => {
     return {
       name: uppercaseFirstLetter(ele),
       cost: cost,
@@ -21,22 +22,28 @@ export function createItemList(array, damage, cost, category) {
 
 export const intoTheOddItems = [];
 
+function cleanList(list) {
+  return list.split(",").map((ele) => {
+    return ele.replace(",", "").trim();
+  });
+}
+
 const handWeapons = createItemList(
-  "Dagger, bow, pitchfork, sword, pistol, club".split(", "),
+  "Dagger, bow, pitchfork, sword, pistol, club",
   "d6",
   2,
   "Hand Weapons"
 );
 
 const fieldWeapons = createItemList(
-  "Musket, pistol brace, sword and dagger, halberd,".split(", "),
+  "Musket, pistol brace, sword and dagger, halberd",
   "d8",
   10,
   "Field Weapons"
 );
 
 const nobleWeapons = createItemList(
-  "Finely made sabre, duelling pistol, rapier,".split(", "),
+  "Finely made sabre, duelling pistol, rapier",
   "d8",
   30,
   "Noble Weapons"

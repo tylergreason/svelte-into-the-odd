@@ -3,8 +3,15 @@
     import { intoTheOddItems } from '../data/itemLists';
 
     function itemClick(e) {
-        console.log(e.target);
         let item = JSON.parse(e.target.dataset.item);
+        // find the id of the last item in the player items list. If it doesn't exist, make it = 0.
+        let id;
+        if (!!$player.playerItems[$player.playerItems.length -1]) {
+            id = $player.playerItems[$player.playerItems.length -1].id +1 || 0;
+        } else {
+            id = 0;
+        }
+        item.id = id;
         if ($player.stats.money - item.cost >= 0) {
             $player.stats.money -= item.cost;
             $player.playerItems.push(item);
@@ -17,13 +24,18 @@
     
 </script>
 
-<style>
-    .able {
-        color: green;
-    }
-
-    .unable {
-        color: darkred;
+<style type="text/scss">
+    .purchase-item {
+        &.able {
+            color: black;
+            transition: 0.2s;
+        }
+        
+        &.unable {
+            transition: 0.2s;
+            color: rgb(122, 122, 122);
+            text-decoration: line-through;
+        }
     }
 </style>
 
@@ -35,7 +47,7 @@
             {#each category.items as item}
                 <div
                     on:click={itemClick} data-item={JSON.stringify(item)}
-                    class={canAfford($player.stats.money, item.cost)}
+                    class="purchase-item {canAfford($player.stats.money, item.cost)}"
                 >{item.name}</div>
             {/each}
         {/each}

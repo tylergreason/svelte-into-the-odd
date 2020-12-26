@@ -9,13 +9,20 @@
         return total;
     }
 
+    const fadeTime = 200;
+
     const rollStats = stats => {
-        stats.str = rollDice(6, 3);
-        stats.dex = rollDice(6, 3);
-        stats.wil = rollDice(6, 3);
-        stats.hp = rollDice(6);
-        stats.money = rollDice(6, 3);
-        $player.playerItems = [];
+        const valueElements = Array.from(document.getElementsByClassName('stat-value'));
+        valueElements.forEach(ele => ele.classList.add('generating'));
+        window.setTimeout(() => {
+            valueElements.forEach(ele => ele.classList.remove('generating'));
+            stats.str = rollDice(6, 3);
+            stats.dex = rollDice(6, 3);
+            stats.wil = rollDice(6, 3);
+            stats.hp = rollDice(6);
+            stats.money = rollDice(6, 3);
+            $player.playerItems = [];
+        }, 200);
         return stats;
     }
 
@@ -46,11 +53,24 @@
         display: flex;
         flex-flow: row;
         justify-content: space-between;
+        align-items: center;
 
-    div:first-of-type {
+    .stat-name {
         text-transform: uppercase;
         color: black;
+        }
+
+    .stat-value {
+        max-width: 50px;
+        opacity: 1;
+        transition: .2s;
+        border: none;
     }
+
+    :global(.stat-value.generating) {
+            opacity: 0;            
+            transition: .2s;
+        }
     }
     
     .container button {
@@ -62,7 +82,8 @@
     <h3>Stats</h3>
     {#each statsKeys as statKey}
     <div class="stat-container">
-        <div>{statKey}:</div><div>{$player.stats[statKey]}</div>
+        <div class="stat-name">{statKey}:</div>
+        <input type="number" class="stat-value" bind:value={$player.stats[statKey]}>
     </div>
     {/each}
     <button on:click={() => $player.stats = rollStats($player.stats)}>Roll Stats</button>
