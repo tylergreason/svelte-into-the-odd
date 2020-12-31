@@ -2,6 +2,7 @@ import { writable } from "svelte/store";
 
 let stats = {
   hp: 0,
+  currentHp: 0,
   str: 0,
   dex: 0,
   wil: 0,
@@ -14,3 +15,5 @@ export const player = writable({
   stats: stats,
   playerItems: playerItems,
 });
+
+export const rollHistory = writable(["a"]);

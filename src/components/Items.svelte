@@ -27,7 +27,7 @@
 <style type="text/scss">
     .purchase-item {
         &.able {
-            color: black;
+            // color: black;
             transition: 0.2s;
         }
         
@@ -40,7 +40,7 @@
 </style>
 
 <div>
-    <h3>Items</h3>
+    <h3 class="title">Items</h3>
     <ul>
         {#each intoTheOddItems as category}
                 <h4>{category.category} - ${category.items[0].cost}, {category.items[0].damage} damage</h4>

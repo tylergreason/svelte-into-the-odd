@@ -21,7 +21,7 @@
 </style>
 
 <div>
-    <h3>Player Items</h3>
+    <h3 class="title">Player Items</h3>
     <ul>
         {#each $player.playerItems as item}
             <li 
